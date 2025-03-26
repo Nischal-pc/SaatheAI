@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
@@ -12,6 +13,7 @@ import {
   ArrowRight,
   Github,
   Twitter,
+  Facebook,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,7 +63,9 @@ export default function LoginPage() {
     }
   };
 
-  const handleOAuthLogin = async (provider: "github" | "twitter") => {
+  const handleOAuthLogin = async (
+    provider: "google" | "github" | "facebook"
+  ) => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
@@ -257,19 +261,25 @@ export default function LoginPage() {
                     type="button"
                     variant="outline"
                     className="border-slate-700 text-white hover:bg-slate-800"
-                    onClick={() => handleOAuthLogin("github")}
+                    onClick={() => handleOAuthLogin("google")}
                   >
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
+                    <Image
+                      src="/google-logo.svg"
+                      alt="Google"
+                      className="mr-2 h-4 w-4 bg-white rounded-full"
+                      width={20}
+                      height={20}
+                    />
+                    Google
                   </Button>
                   <Button
                     type="button"
                     variant="outline"
                     className="border-slate-700 text-white hover:bg-slate-800"
-                    onClick={() => handleOAuthLogin("twitter")}
+                    onClick={() => handleOAuthLogin("facebook")}
                   >
-                    <Twitter className="mr-2 h-4 w-4" />
-                    Twitter
+                    <Facebook className="mr-2 h-4 w-4" />
+                    Facebook
                   </Button>
                 </div>
               </div>

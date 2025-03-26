@@ -37,6 +37,19 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const email1 = email.trim(); // Ensure no spaces
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email1)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      await signup(email, password);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
 
     if (!name || !email || !password || !confirmPassword) {
       toast({
