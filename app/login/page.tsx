@@ -63,9 +63,7 @@ export default function LoginPage() {
     }
   };
 
-  const handleOAuthLogin = async (
-    provider: "google" | "github" | "facebook"
-  ) => {
+  const handleOAuthLogin = async (provider: "google" | "facebook") => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
